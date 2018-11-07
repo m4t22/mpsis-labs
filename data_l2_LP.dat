@@ -1,0 +1,5 @@
+data;
+
+param E_numb := 16;
+param D_numb := 2;
+param P_numb := 

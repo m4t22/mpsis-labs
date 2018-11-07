@@ -1,0 +1,7 @@
+/* Input data */
+
+data;
+
+param n := 2;
+
+end;
