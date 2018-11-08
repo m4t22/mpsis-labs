@@ -40,6 +40,6 @@ minimize z: sum{e in E,d in D, p in P}(delta[e,d,p]*x[d,p]);
 
 /* Constraints */
 
-s.t. c1{d in D} : sum{p in P}(x[]) == h[d];
+s.t. c1{d in D} : sum{p in P}(x[d,p]) == h[d];
 
 end;
