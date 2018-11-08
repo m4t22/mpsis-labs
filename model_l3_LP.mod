@@ -22,7 +22,7 @@ param delta{e in E, d in D, p in P}, >=0, default 0;
 
 /* koszt przeslania danych laczem */
 
-param KSI{e in E} >= 0;
+param ksi{e in E} >= 0;
 
 /* stale */
 
@@ -32,14 +32,13 @@ param h{d in D}, >= 0;
 /* zmienna */
 
 var x{p in P, d in D} >= 0;
-var y{e in E} >= 0;
 
 /* function subjected to minimization */
 
-minimize z: sum{e in E,d in D, p in P}(delta[e,d,p]*x[d,p]);
+minimize z: sum{e in E,d in D, p in P} ksi[e] * delta[e,d,p] * x[d,p];
 
 /* Constraints */
 
-s.t. c1{d in D} : sum{p in P}(x[]) == h[d];
+s.t. c1{d in D} : sum{p in P}(x[d,p]) == h[d];
 
 end;
