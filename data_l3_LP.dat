@@ -34,7 +34,7 @@ param: delta :=
 ;
 
 
-param KSI :=
+param ksi :=
 1   30
 2   90
 3   10
