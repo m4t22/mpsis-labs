@@ -36,12 +36,10 @@ var y{e in E} >= 0;
 
 /* function subjected to minimization */
 
-minimize z: sum{e in E} KSI[e]*y[e];
+minimize z: sum{e in E,d in D, p in P}(delta[e,d,p]*x[d,p]);
 
 /* Constraints */
 
 s.t. c1{d in D} : sum{p in P}(x[]) == h[d];
-s.t. c2{e in E} : sum{d in D, p in P}(delta[e,d,p]*x[d,p]) <= y[e];
-
 
 end;
