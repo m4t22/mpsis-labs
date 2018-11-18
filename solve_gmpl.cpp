@@ -64,9 +64,9 @@ int main( int argc, char *argv[] )
 	double *column_primal = model.primalColumnSolution();
 	int i;
 
-	for ( i = columns_count; i > 0; i-- )
+	for ( i = 0; i < columns_count; i++ )
 	{
-		printf( "x[%d] = %g\n", columns_count - i + 1, column_primal[ i - 1 ] );
+		printf( "x[%d] = %g\n", i + 1, column_primal[ i ] );
 	}
 
 	return 0;

@@ -20,9 +20,6 @@ set D, default {1..D_numb};
 param A{e in E, v in V}, >=0, default 0;
 param B{e in E, v in V}, >=0, default 0;
 
-/* Ograniczenia pojemnosci laczy */
-
-param c{e in E}, >=0, default 10;
 
 /* koszt przeslania danych laczem */
 
@@ -47,6 +44,5 @@ minimize z: sum{e in E} KSI[e]*(sum{d in D} x[e,d]);
 s.t. c1{d in D, v in V : v == s[d]} : sum{e in E}(A[e,v]*x[e,d] - B[e,v]*x[e,d]) == h[d];
 s.t. c2{d in D, v in V : v <> s[d] and v <> t[d]} : sum{e in E}(A[e,v]*x[e,d] - B[e,v]*x[e,d]) == 0;
 s.t. c3{d in D, v in V : v == t[d]} : sum{e in E}(A[e,v]*x[e,d] - B[e,v]*x[e,d]) == -h[d];
-s.t. c4{e in E} : sum{d in D} x[e,d] <= c[e]; 
 
 end;
