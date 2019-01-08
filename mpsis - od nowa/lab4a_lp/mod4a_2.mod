@@ -17,34 +17,34 @@ set K, default {1..K_n};
 param delta{e in E, d in D, p in P}, binary, default 0;
 param h{d in D}, >= 0;
 param M := 10000;
-param a{k in K};
-param b{k in K};
+param a{e in E, k in K};
+param b{e in E, k in K};
 
 /* Decision variables */
 var x{d in D, p in P} >= 0;
 var y{e in E} >= 0;
-var m{e in E, k in K};
-var u{e in E, k in K}, binary, >= 0;
+var z{e in E}, >= 0;
+var u{d in D, p in P}, binary, >= 0;
 
 /* Objective function 'z' */
 #minimize z: sum{e in E} sqrt(y[e]);
-minimize z: sum{e in E, k in K} m[e,k]*a[k]+ sum{e in E, k in K}u[e,k]*b[k];
+minimize v: sum{e in E} z[e];
 
 /* Constraints */
 
 s.t. C1{d in D}: sum{p in P} x[d,p] == h[d];
-s.t. C2{e in E}: sum{k in K} m[e,k] == y[e];
-s.t. C3{e in E}: sum{k in K} u[e,k] == 1;
-s.t. C4{e in E}: sum{d in D, p in P} delta[e,d,p]*x[d,p] == y[e];
-s.t. C5{e in E, k in K}: m[e,k] <= u[e,k]*M;
-s.t. C6{e in E, k in K}: 0 <= m[e,k];
+s.t. C2{e in E, k in K}: z[e] >= a[e,k]*y[e] + b[e,k];
+s.t. C3{e in E}: sum{d in D, p in P} delta[e,d,p]*h[d]*u[d,p] == y[e];
+s.t. C4{d in D}: sum{p in P} u[d,p] == 1;
+s.t. C5{d in D, p in P}: x[d,p] <= M*u[d,p];
+
 
 data;
 
 param E_n := 16;
 param P_n := 2;
 param D_n := 2;
-param K_n := 2;
+param K_n := 3;
 
 param h :=
 1 3
@@ -54,11 +54,13 @@ param h :=
 param a :=
 1 2
 2 5
+3 7
 ;
 
 param b :=
 1 0
 2 -6
+3 -12
 ;
 
 # e d p
