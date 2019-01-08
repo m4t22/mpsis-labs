@@ -18,12 +18,12 @@ param delta{e in E, d in D, p in P}, binary, default 0;
 param h{d in D}, >= 0;
 param KSI{e in E}, >= 0;
 param M{l in L}, integer, >=0;
-param k{l in L}, integer, >=0;
+param k{l in L}, integer, >=0; # koszt wykorzystania modulu
 
 /* Decision variables */
 var x{d in D, p in P} >= 0;
 var y{e in E}, integer, >= 0;
-var f{e in E, l in L}, integer, >= 0;
+var f{e in E, l in L}, integer, >= 0; # ile danych modulow uzyto
 
 /* Objective function 'z' */
 minimize z: sum{e in E} KSI[e]*sum{d in D, p in P} delta[e,d,p]*x[d,p] + sum{e in E, l in L}f[e,l]*k[l];
