@@ -1,6 +1,3 @@
-# MPSiS 2018/2019
-# Model 1a
-
 /* Number of variables */
 param E_n, integer, >= 1; # liczba lukow 
 param P_n, integer, >= 1; # liczba sciezek
@@ -37,17 +34,15 @@ var r, >= 0; procentowo, jak dużo ruchu nasza sieć uciągnie przy ograniczeniu
 maximize f: r; 
 
 /* Constraints */
-# suma ruchu na wszstkich ścieżkach dla każdego zapotrzebowania musi się równać temu zapotrzebowaniu
-s.t. C1{d in D}: sum{p in P} x[d,p] == h[d];
 # koszt liczy się tu z linearyzacji: jest y[e] ale oznaczo ruch #######################
-s.t. C2{e in E, k in K}: z[e] >= a[k]*y[e] + b[k] +kappa[e]*v[e]; #########################
+s.t. C1{e in E, k in K}: z[e] >= a[k]*y[e] + b[k] ; #########################
 # ruch na łączu równa się sumie zapotrzebowań na danym łączu (jeżeli tylko one należą do ścieżki p dla zapotrzebowania d) przemnożonych przez procent, który maksymalzujemy.
-s.t. C3{e in E}: y[e] == sum{d in D, p in P} delta[e,d,p]*h[d]*u[d,p]*r;
-s.t. C4{d in D}: sum{p in P} u[d,p] == 1; # zapobiega, że weźmiemy więcej niż 1 ścieżkę
-s.t. C5{d in D, p in P}: x[d,p] <= M*u[d,p]; # Ustawia u[d,p] na 1 jeżeli cokolwiek jest w x[d,p]
+s.t. C2{e in E}: y[e] == sum{d in D, p in P} delta[e,d,p]*h[d]*u[d,p]*r;
+s.t. C3{d in D}: sum{p in P} u[d,p] == 1; # zapobiega, że weźmiemy więcej niż 1 ścieżkę
+s.t. C4{d in D, p in P}: x[d,p] <= M*u[d,p]; # Ustawia u[d,p] na 1 jeżeli cokolwiek jest w x[d,p]
 #Nowe ograniczenia
-s.t. C6: sum{e in E} z[e] <= B; # zapewnienie, że nie przekroczymy budżetu
-s.t. C7{d in D}: sum{p in P} x[d,p] == r * h[d]; ruch na ścieżce to r * zapotrzebowanie
-s.t. C8{e in E}: y[e] <= C; # zapewnienie, że ruch na łączu nie zostanie przekroczony
-s.t. C9: r<=1; # r jest w procentach, max 100% czyli 1
-s.t. C10{e in E}: y[e]<= W*v[e]; ####### ustawia v[e] na 1, jeżeli jest jakikolwiek ruch na łączu y[e]
+s.t. C5: sum{e in E} z[e] +kappa[e]*v[e]<= B; # zapewnienie, że nie przekroczymy budżetu
+s.t. C6{d in D}: sum{p in P} x[d,p] == r * h[d]; ruch na ścieżce to r * zapotrzebowanie
+s.t. C7{e in E}: y[e] <= C; # zapewnienie, że ruch na łączu nie zostanie przekroczony
+s.t. C8: r<=1; # r jest w procentach, max 100% czyli 1
+s.t. C9{e in E}: y[e]<= W*v[e]; ####### ustawia v[e] na 1, jeżeli jest jakikolwiek ruch na łączu y[e]
