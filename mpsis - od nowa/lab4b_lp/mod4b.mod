@@ -1,5 +1,5 @@
 # MPSiS 2018/2019
-# Model 1a
+# Linearyzacja problemu wkleslego - sqrt(y)
 
 /* Number of variables */
 param E_n, integer, >= 1; # liczba lukow 
@@ -33,11 +33,11 @@ minimize z: sum{e in E, k in K} m[e,k]*a[k]+ sum{e in E, k in K}u[e,k]*b[k];
 /* Constraints */
 
 s.t. C1{d in D}: sum{p in P} x[d,p] == h[d];
-s.t. C2{e in E}: sum{k in K} m[e,k] == y[e];
-s.t. C3{e in E}: sum{k in K} u[e,k] == 1;
+s.t. C2{e in E}: sum{k in K} m[e,k] == y[e];  # linearyzacja
+s.t. C3{e in E}: sum{k in K} u[e,k] == 1; # linearyzacja
 s.t. C4{e in E}: sum{d in D, p in P} delta[e,d,p]*x[d,p] == y[e];
-s.t. C5{e in E, k in K}: m[e,k] <= u[e,k]*M;
-s.t. C6{e in E, k in K}: 0 <= m[e,k];
+s.t. C5{e in E, k in K}: m[e,k] <= u[e,k]*M; # linearyzacja
+s.t. C6{e in E, k in K}: 0 <= m[e,k]; # linearyzacja
 
 data;
 

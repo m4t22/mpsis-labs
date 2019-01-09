@@ -15,7 +15,7 @@ set D, default {1..D_n};
 param delta{e in E, d in D, p in P}, binary, default 0;
 param h{d in D}, >= 0;
 param KSI{e in E}, >= 0;
-param M := 2;
+param M := 2; # rozmiar instalowanego modulu
 
 /* Decision variables */
 var x{d in D, p in P} >= 0;

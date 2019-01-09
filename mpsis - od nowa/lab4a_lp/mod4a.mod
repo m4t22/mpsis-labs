@@ -1,5 +1,5 @@
 # MPSiS 2018/2019
-# Model 1a
+# linearyzacja problemu wypuklego, funkcja y^2
 
 /* Number of variables */
 param E_n, integer, >= 1; # liczba lukow 
@@ -33,7 +33,7 @@ minimize v: sum{e in E} z[e];
 /* Constraints */
 
 s.t. C1{d in D}: sum{p in P} x[d,p] == h[d];
-s.t. C2{e in E, k in K}: z[e] >= a[k]*y[e] + b[k];
+s.t. C2{e in E, k in K}: z[e] >= a[k]*y[e] + b[k]; # ograniczenie na linearyzacje
 s.t. C3{e in E}: sum{d in D, p in P} delta[e,d,p]*h[d]*u[d,p] == y[e];
 s.t. C4{d in D}: sum{p in P} u[d,p] == 1;
 s.t. C5{d in D, p in P}: x[d,p] <= M*u[d,p];

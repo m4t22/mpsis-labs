@@ -17,7 +17,7 @@ set L, default {1..L_n};
 param delta{e in E, d in D, p in P}, binary, default 0;
 param h{d in D}, >= 0;
 param KSI{e in E}, >= 0;
-param M{l in L}, integer, >=0;
+param M{l in L}, integer, >=0; # rozmiary modulow do podania
 param k{l in L}, integer, >=0; # koszt wykorzystania modulu
 
 /* Decision variables */

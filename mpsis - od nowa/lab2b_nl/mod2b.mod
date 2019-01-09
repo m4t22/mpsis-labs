@@ -30,9 +30,9 @@ minimize z: sum{e in E}(KSI[e]*sum{d in D}x[e,d]);
 
 /* Constraints */
 
-s.t. C1{d in D, v in V : v == s[d]}: sum{e in E}a[e,v]*x[e,d] - sum{e in E}b[e,v]*x[e,d] = h[d];
-s.t. C2{d in D, v in V : v <> s[d] and v <> t[d] }: sum{e in E}a[e,v]*x[e,d] - sum{e in E}b[e,v]*x[e,d] = 0;
-s.t. C3{d in D, v in V : v == t[d] }: sum{e in E}a[e,v]*x[e,d] - sum{e in E}b[e,v]*x[e,d] = -h[d];
+s.t. C1{d in D, v in V : v == s[d]}: sum{e in E}a[e,v]*x[e,d] - sum{e in E}b[e,v]*x[e,d] == h[d];
+s.t. C2{d in D, v in V : v <> s[d] and v <> t[d] }: sum{e in E}a[e,v]*x[e,d] - sum{e in E}b[e,v]*x[e,d] == 0;
+s.t. C3{d in D, v in V : v == t[d] }: sum{e in E}a[e,v]*x[e,d] - sum{e in E}b[e,v]*x[e,d] == -h[d];
 s.t. C4{e in E}: sum{d in D}x[e,d] <= c[e];
 
 end;
